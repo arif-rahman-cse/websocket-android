@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         messageList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         messageList.setAdapter(adapter);
 
-        rxWebSocket = new RxWebSocket("ws://echo.websocket.org");
+        rxWebSocket = new RxWebSocket("ws://44.237.74.211/ws/chat/one-to-one/6/fb9a5773bfe8fa18138852f6896d370dbaa64b39/");
 
         rxWebSocket.onOpen()
                 .subscribeOn(Schedulers.io())
@@ -78,7 +81,15 @@ public class MainActivity extends AppCompatActivity {
                     .setTitle("New message")
                     .setView(textInput)
                     .setPositiveButton("Send", (dialog, which) -> {
-                        rxWebSocket.sendMessage(textInput.getText().toString())
+                        JSONObject jobj = new JSONObject();
+                        String msg = "{\"message\": \"/hug\"}";
+                        try {
+                            jobj = new JSONObject(msg);
+                        } catch (JSONException e) {
+                            //e.printStackTrace();
+                        }
+
+                        rxWebSocket.sendMessage(jobj)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(
@@ -89,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                     .show();
         });
+
     }
 
     @Override

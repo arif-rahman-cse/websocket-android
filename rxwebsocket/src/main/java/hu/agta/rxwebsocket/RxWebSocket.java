@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import hu.agta.rxwebsocket.entities.SocketClosedEvent;
 import hu.agta.rxwebsocket.entities.SocketClosingEvent;
 import hu.agta.rxwebsocket.entities.SocketEvent;
@@ -127,10 +129,10 @@ public class RxWebSocket {
         });
     }
 
-    public synchronized Single<Boolean> sendMessage(@Nullable String content) {
+    public synchronized Single<Boolean> sendMessage(@Nullable JSONObject content) {
         return Single.fromCallable(() -> {
             if (webSocket != null) {
-                return webSocket.send(content);
+                return webSocket.send(String.valueOf(content));
             } else {
                 throw new RuntimeException("WebSocket not connected!");
             }

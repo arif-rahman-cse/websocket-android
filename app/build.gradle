@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 30
     buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "hu.agta.websocket"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
@@ -27,11 +27,11 @@ android {
 dependencies {
     implementation project(path: ':rxwebsocket')
 
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.android.support:recyclerview-v7:27.0.2'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:design:27.0.2'
-    implementation 'com.squareup.okio:okio:1.14.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.squareup.okio:okio:2.6.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.16'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 }
